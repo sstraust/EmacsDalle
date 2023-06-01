@@ -5,6 +5,7 @@
 (defconst OPENAI-DALLE-TOKEN "")
 (defconst PEXELS-URL "https://api.pexels.com/v1/search")
 (defconst PEXELS-TOKEN "")
+(defconst IMAGE-COUNT 5)
 
 (defun get-request-args-list (params)
   (concat "?"
@@ -78,12 +79,21 @@
   (cdr (assoc 'url (aref image-url-list (1- chosen-number))))))
 
 
-(defun generate-featured-blog-image-dalle (prompt n)
-  (interactive)
+(defun generate-featured-blog-image-dalle-helper (prompt n)
   (let ((images (request-dalle-images prompt n)))
     (choose-image-from-menu images)))
 
-(defun generate-featured-blog-image-pexels (prompt n)
+(defun generate-featured-blog-image-dalle ()
+  (interactive)
+  (let ((prompt (read-string "Enter a prompt: ")))
+    (generate-featured-blog-image-dalle-helper prompt IMAGE-COUNT)))
+
+(defun generate-featured-blog-image-pexels-helper (prompt n)
   (interactive)
   (let ((images (request-pexels-images prompt n)))
     (choose-image-from-menu images)))
+
+(defun generate-featured-blog-image-pexels ()
+  (interactive)
+  (let ((prompt (read-string "Enter a prompt: ")))
+    (generate-featured-blog-image-pexels-helper prompt IMAGE-COUNT)))
