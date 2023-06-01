@@ -80,7 +80,7 @@
 
 
 (defun generate-featured-blog-image-dalle-helper (prompt n)
-  (let ((images (get-dalle-img-request-dalle-imagesxs prompt n)))
+  (let ((images (get-dalle-img-request-dalle-images prompt n)))
     (get-dalle-img-choose-image-from-menu images)))
 
 (defun generate-featured-blog-image-dalle ()
